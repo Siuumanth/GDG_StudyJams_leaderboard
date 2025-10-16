@@ -1,6 +1,6 @@
 /* General body styling */
 body {
-  background-color: #0d1117; /* Darker background for contrast */
+  background-color: #0d1117;
   color: #f0f6fc;
   font-family: "Roboto", sans-serif;
   margin: 0;
@@ -9,40 +9,47 @@ body {
   overflow-x: hidden;
 }
 
-/* Header Styling */
+/* Header Styling - Google Blue */
 .header-google {
-  background-color: #1f6feb; /* Brighter shade of blue */
-  padding: 40px 0;
+  background: linear-gradient(135deg, #4285F4 0%, #1a73e8 100%);
+  padding: 50px 0;
   text-align: center;
   color: white;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 20px rgba(66, 133, 244, 0.3);
 }
 
 .header-google h1 {
-  font-size: 2.5rem;
-  letter-spacing: 1.5px;
+  font-size: 2.8rem;
+  letter-spacing: 2px;
   font-weight: bold;
   margin: 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-/* Top bar layout with logo, search, countdown, and progress */
+/* Top bar layout */
 .top-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px;
-  max-width: 1200px;
-  margin: 30px auto;
-  background-color: #161b22;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  padding: 25px;
+  max-width: 1300px;
+  margin: 40px auto;
+  background: linear-gradient(145deg, #161b22 0%, #1c2128 100%);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
   flex-wrap: wrap;
+  border: 1px solid #2d333b;
 }
 
 .gdg-logo {
-  height: 60px;
-  margin-right: 15px;
-  border-radius: 2px;
+  height: 70px;
+  margin-right: 20px;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.gdg-logo:hover {
+  transform: scale(1.05);
 }
 
 .search-bar {
@@ -51,65 +58,81 @@ body {
 }
 
 .search-bar input {
-  padding: 12px;
+  padding: 14px 20px;
   font-size: 1.1rem;
-  border: 1px solid #2d333b;
-  border-radius: 8px;
-  background-color: #f6ed9e;
-  color: #b9c7d4;
-  transition: border-color 0.3s ease;
-  width: 100%; /* Ensure input takes full width */
+  border: 2px solid #2d333b;
+  border-radius: 12px;
+  background-color: #21262d;
+  color: #f0f6fc;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.search-bar input::placeholder {
+  color: #8b949e;
 }
 
 .search-bar input:focus {
   outline: none;
-  border-color: #1f6feb;
+  border-color: #4285F4;
+  background-color: #161b22;
+  box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.1);
 }
 
 .countdown {
-  color: #d1d5da;
-  font-size: 1.2rem;
-  margin: 10px;
+  color: #4285F4;
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 10px 20px;
+  padding: 10px 20px;
+  background-color: #21262d;
+  border-radius: 10px;
+  border: 1px solid #2d333b;
 }
 
 .progress-area {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  min-width: 220px;
 }
 
-/* Progress bar styling */
+/* Progress bar styling - Google colors gradient */
 .target-progress-container {
-  width: 200px;
-  height: 20px;
-  border-radius: 10px;
+  width: 220px;
+  height: 24px;
+  border-radius: 12px;
   background-color: #21262d;
   margin-top: 10px;
   position: relative;
   overflow: hidden;
+  border: 1px solid #2d333b;
 }
 
 .target-progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, #34a853, #fbbc04);
-  border-radius: 10px;
+  background: linear-gradient(90deg, #4285F4, #34A853, #FBBC04);
+  border-radius: 12px;
   transition: width 0.5s ease;
+  box-shadow: 0 0 10px rgba(66, 133, 244, 0.5);
 }
 
 #target-text {
   color: #c9d1d9;
-  font-size: 0.9rem;
-  margin-top: 5px;
+  font-size: 0.95rem;
+  margin-top: 8px;
+  font-weight: 500;
 }
 
 /* Leaderboard container */
 .leaderboard-table {
-  max-width: 1200px;
+  max-width: 1300px;
   margin: 40px auto;
-  background-color: #161b22;
-  border-radius: 12px;
-  padding: 25px;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(145deg, #161b22 0%, #1c2128 100%);
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  border: 1px solid #2d333b;
 }
 
 .leaderboard-body {
@@ -121,154 +144,280 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 0;
+  padding: 20px;
   margin-bottom: 15px;
-  transition: background-color 0.3s;
+  transition: all 0.3s;
   border-bottom: 1px solid #2d333b;
+  border-radius: 12px;
+  background-color: rgba(33, 38, 45, 0.4);
 }
 
 .participant-info:hover {
   background-color: #21262d;
+  transform: translateX(5px);
+  box-shadow: 0 4px 12px rgba(66, 133, 244, 0.2);
+}
+
+/* Top 3 Highlights */
+.participant-info.rank-1 {
+  background: linear-gradient(145deg, rgba(255, 215, 0, 0.15), rgba(255, 215, 0, 0.05));
+  border: 2px solid rgba(255, 215, 0, 0.4);
+  box-shadow: 0 4px 16px rgba(255, 215, 0, 0.2);
+}
+
+.participant-info.rank-1:hover {
+  background: linear-gradient(145deg, rgba(255, 215, 0, 0.2), rgba(255, 215, 0, 0.08));
+  box-shadow: 0 6px 20px rgba(255, 215, 0, 0.3);
+}
+
+.participant-info.rank-2 {
+  background: linear-gradient(145deg, rgba(192, 192, 192, 0.15), rgba(192, 192, 192, 0.05));
+  border: 2px solid rgba(192, 192, 192, 0.4);
+  box-shadow: 0 4px 16px rgba(192, 192, 192, 0.2);
+}
+
+.participant-info.rank-2:hover {
+  background: linear-gradient(145deg, rgba(192, 192, 192, 0.2), rgba(192, 192, 192, 0.08));
+  box-shadow: 0 6px 20px rgba(192, 192, 192, 0.3);
+}
+
+.participant-info.rank-3 {
+  background: linear-gradient(145deg, rgba(205, 127, 50, 0.15), rgba(205, 127, 50, 0.05));
+  border: 2px solid rgba(205, 127, 50, 0.4);
+  box-shadow: 0 4px 16px rgba(205, 127, 50, 0.2);
+}
+
+.participant-info.rank-3:hover {
+  background: linear-gradient(145deg, rgba(205, 127, 50, 0.2), rgba(205, 127, 50, 0.08));
+  box-shadow: 0 6px 20px rgba(205, 127, 50, 0.3);
 }
 
 .participant-rank {
-  padding-right: 10px;
-  font-size: 2.5rem;
+  padding-right: 20px;
+  font-size: 2.8rem;
   font-weight: bold;
-  color: #1f6feb;
+  background: linear-gradient(135deg, #4285F4, #34A853);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  min-width: 80px;
 }
 
 .participant-name {
-  font-size: 1.4rem;
-  color: #58a6ff;
+  font-size: 1.5rem;
+  color: #4285F4;
   display: flex;
   align-items: center;
+  font-weight: 600;
 }
 
 .participant-badges {
-  font-size: 0.9rem;
-  margin-left: 12px;
-  color: #f0e68c;
+  font-size: 1rem;
+  margin-left: 15px;
+  padding: 4px 12px;
+  background-color: #2d333b;
+  border-radius: 20px;
+  color: #FBBC04;
+  font-weight: 500;
 }
 
-/* Adjustments for the progress bar visibility on all screen sizes */
+/* Progress container */
 .progress-container {
   flex-grow: 1;
-  height: 15px;
+  height: 18px;
   background-color: #21262d;
-  border-radius: 8px;
+  border-radius: 10px;
   margin-left: 20px;
   position: relative;
+  overflow: hidden;
+  border: 1px solid #2d333b;
 }
 
 .progress-fill {
   height: 100%;
-  background-color: #00e676;
-  border-radius: 8px;
+  background: linear-gradient(90deg, #34A853, #4285F4);
+  border-radius: 10px;
   transition: width 0.4s ease;
+  box-shadow: 0 0 10px rgba(52, 168, 83, 0.4);
+}
+
+/* Modal Styling */
+.modal-content {
+  background-color: #161b22;
+  border: 1px solid #2d333b;
+  border-radius: 16px;
+  color: #f0f6fc;
+}
+
+.modal-header {
+  background: linear-gradient(135deg, #4285F4 0%, #1a73e8 100%);
+  color: white;
+  border-bottom: 1px solid #2d333b;
+  border-radius: 16px 16px 0 0;
+  padding: 20px 25px;
+}
+
+.modal-title {
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.modal-body {
+  background-color: #0d1117;
+  color: #f0f6fc;
+  padding: 25px;
+}
+
+.modal-footer {
+  background-color: #161b22;
+  border-top: 1px solid #2d333b;
+  border-radius: 0 0 16px 16px;
+}
+
+.btn-close {
+  filter: invert(1);
+}
+
+/* Badge Cards Styling */
+.badge-cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.badge-card {
+  background: linear-gradient(145deg, #1c2128, #21262d);
+  border: 1px solid #2d333b;
+  border-radius: 12px;
+  padding: 15px;
+  transition: all 0.3s ease;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.badge-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(66, 133, 244, 0.3);
+  border-color: #4285F4;
+}
+
+.badge-card-icon {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.badge-card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #4285F4;
+  margin-bottom: 5px;
+}
+
+.badge-card-date {
+  font-size: 0.85rem;
+  color: #8b949e;
+}
+
+.details-section {
+  margin-bottom: 25px;
+}
+
+.details-section h6 {
+  color: #4285F4;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #2d333b;
+}
+
+.stat-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #21262d;
+}
+
+.stat-label {
+  color: #8b949e;
+  font-weight: 500;
+}
+
+.stat-value {
+  color: #f0f6fc;
+  font-weight: 600;
 }
 
 /* Responsive layout */
 @media (max-width: 768px) {
   .top-bar {
     flex-direction: column;
-    padding: 15px;
-    margin: 10px;
-    align-items: flex-start; /* Align items to the start for better spacing */
+    padding: 20px;
+    margin: 20px 10px;
+    align-items: flex-start;
+  }
+
+  .header-google h1 {
+    font-size: 2rem;
   }
 
   .gdg-logo {
     margin-bottom: 15px;
+    height: 60px;
   }
 
   .search-bar {
+    margin: 15px 0;
+    width: 100%;
+  }
+
+  .countdown {
     margin: 10px 0;
-    width: 100%; /* Ensure search bar takes full width */
-  }
-
-  .leaderboard-table {
-    width: 96%;
-    margin: 0 auto; /* Center leaderboard on mobile */
-  }
-
-  .participant-name {
-    font-size: 1.1rem;
-    font-weight: bolder;
-  }
-
-  .participant-info {
-    padding: 10px 0; /* Slightly more padding for touch devices */
-    flex-direction: column; /* Stack items vertically for mobile */
-    align-items: flex-start;
+    width: 100%;
+    text-align: center;
   }
 
   .progress-area {
     align-items: center;
-    width: 100%; /* Full width for progress area */
-  }
-
-  .participant-badges {
-    font-size: 0.8rem; /* Adjust badge font size for better fit */
-    margin-left: 12px;
-    color: #f0e68c;
+    width: 100%;
+    margin-top: 15px;
   }
 
   .target-progress-container {
-    width: 100%; /* Ensure progress bar is responsive */
-    height: 15px; /* Height adjusted for smaller screens */
-    margin: 5px 0; /* Reduced margin for compactness */
+    width: 100%;
   }
 
-  /* Responsive adjustments for the progress bar text */
-  #target-text {
-    font-size: 0.8rem;
+  .leaderboard-table {
+    width: 95%;
+    margin: 20px auto;
+    padding: 20px;
   }
 
-  /* Adjust the participant progress container for better visibility on mobile */
+  .participant-info {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px;
+  }
+
+  .participant-rank {
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+  }
+
+  .participant-name {
+    font-size: 1.2rem;
+  }
+
   .progress-container {
-    margin-left: 0px;
-    width: 100%; /* Ensure progress bar fills available space */
-    margin: 5px 0px; /* Add some spacing */
-    height: 10px; /* Slightly reduced height for mobile */
+    margin-left: 0;
+    width: 100%;
+    margin-top: 15px;
+    height: 15px;
+  }
+
+  .badge-cards-container {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
   }
 }
-
-/* Modal Styling */
-.modal-content {
-  margin-top: 40px;
-  border-radius: 10px;
-  /* border: 1px solid #011020; Light gray border */
-}
-
-.modal-header {
-  background-color: #437ebd; /* Bootstrap primary color */
-  color: white; /* White text color */
-  /* border-top-left-radius: 10px;
-  border-top-right-radius: 10px; */
-}
-
-.modal-body {
-  background-color: #373737; /* Light background color */
-  color: #ffffff; /* Dark text color */
-}
-
-.modal-footer {
-  background-color: #437ebd;
-  border-top: 1px solid #dee2e6; /* Light gray border */
-}
-
-.modal-title {
-  font-size: 1.5rem; /* Slightly larger font for title */
-}
-
-/* More Details button */
-.more-details {
-  color: #007bff; /* Bootstrap primary color */
-  transition: color 0.3s ease; /* Smooth transition for color change */
-}
-
-.more-details:hover {
-  color: #0056b3; /* Darker shade on hover */
-}
-
-/* Participant Info Styles */
