@@ -1,12 +1,10 @@
-// Define maximum badges and target date for the countdown
-const maxBadges = 16;
+const maxBadges = 20;
 const targetDate = new Date('2025-10-31');
 
-// Function to update the countdown timer
 function updateCountdown() {
     const now = new Date();
     const timeDiff = targetDate - now;
-    const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+    const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24)); 
     document.getElementById('countdown').textContent = `⏰ ${daysLeft} Day(s) left`;
 }
 
@@ -17,19 +15,20 @@ document.getElementById('search-input').addEventListener('input', function () {
 
     participants.forEach(participant => {
         const name = participant.querySelector('.participant-name').textContent.toLowerCase();
-        participant.style.display = name.includes(searchValue) ? 'flex' : 'none';
+        participant.style.display = name.includes(searchValue) ? 'flex' : 'none'; 
     });
 });
 
-// Function to create badge cards
+// Function to create skill badge cards (FIXED TO SPLIT BY '|')
 function createBadgeCards(badgesString) {
     if (!badgesString || badgesString.trim() === '' || badgesString === 'None') {
-        return '<p style="color: #8b949e; text-align: center;">No badges completed yet</p>';
+        return '<p style="color: #8b949e; text-align: center;">No skill badges completed yet</p>';
     }
 
-    const badges = badgesString.split(',').map(badge => badge.trim()).filter(badge => badge);
+    // ⭐ FIX: Split by the pipe character '|'
+    const badges = badgesString.split('|').map(badge => badge.trim()).filter(badge => badge);
     
-    return badges.map((badge, index) => `
+    return badges.map((badge) => ` 
         <div class="badge-card">
             <div class="badge-card-icon">🏅</div>
             <div class="badge-card-title">${badge}</div>
@@ -37,15 +36,16 @@ function createBadgeCards(badgesString) {
     `).join('');
 }
 
-// Function to create arcade game cards
+// Function to create arcade game cards (FIXED TO SPLIT BY '|')
 function createArcadeCards(gamesString) {
     if (!gamesString || gamesString.trim() === '' || gamesString === 'None') {
         return '<p style="color: #8b949e; text-align: center;">No arcade games completed yet</p>';
     }
 
-    const games = gamesString.split(',').map(game => game.trim()).filter(game => game);
+    // ⭐ FIX: Split by the pipe character '|'
+    const games = gamesString.split('|').map(game => game.trim()).filter(game => game);
     
-    return games.map((game, index) => `
+    return games.map((game) => `
         <div class="badge-card">
             <div class="badge-card-icon">🎮</div>
             <div class="badge-card-title">${game}</div>
@@ -55,12 +55,15 @@ function createArcadeCards(gamesString) {
 
 // Fetch participant data and populate leaderboard
 fetch('data.json')
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    })
     .then(data => {
-        let totalCompletedBadges = 0;
         let completedParticipantsCount = 0;
 
-        // Sort participants by total badges earned
         data.sort((a, b) =>
             (b['# of Skill Badges Completed'] + b['# of Arcade Games Completed']) -
             (a['# of Skill Badges Completed'] + a['# of Arcade Games Completed'])
@@ -71,20 +74,24 @@ fetch('data.json')
         data.forEach((participant, index) => {
             const totalBadges = participant['# of Skill Badges Completed'] + participant['# of Arcade Games Completed'];
             const progressPercentage = Math.min((totalBadges / maxBadges) * 100, 100);
-            totalCompletedBadges += totalBadges;
 
             const participantRow = document.createElement('div');
             participantRow.classList.add('participant-info');
 
             // Add special styling for top 3
+            if (index === 0) participantRow.classList.add('rank-1');
+            else if (index === 1) participantRow.classList.add('rank-2');
+            else if (index === 2) participantRow.classList.add('rank-3');
+            
+            let rankDisplay = `#${index + 1}`;
             let rankEmoji = '';
-            if (index === 0) rankEmoji = '🥇';
-            else if (index === 1) rankEmoji = '🥈';
-            else if (index === 2) rankEmoji = '🥉';
+            if (index === 0) { rankEmoji = '🥇'; rankDisplay = '1st'; }
+            else if (index === 1) { rankEmoji = '🥈'; rankDisplay = '2nd'; }
+            else if (index === 2) { rankEmoji = '🥉'; rankDisplay = '3rd'; }
 
             participantRow.innerHTML = `
-                <span class="participant-rank">${rankEmoji ? rankEmoji : '#' + (index + 1)}</span>
-                <span class="participant-name">${participant['User Name']}  
+                <span class="participant-rank">${rankEmoji ? rankEmoji : rankDisplay}</span>
+                <span class="participant-name">${participant['User Name']} 
                     <span class="participant-badges">🌟 x ${totalBadges}</span>
                 </span>
                 <span class="more-details" data-index="${index}" style="cursor: pointer; margin-left: 10px; color: #58a6ff; font-weight: 600;">▼ Details</span>
@@ -95,13 +102,10 @@ fetch('data.json')
 
             // Add event listener to show modal on click
             participantRow.querySelector('.more-details').addEventListener('click', function() {
-                // Populate modal with participant details
                 const modalBody = document.getElementById('modal-details-body');
                 
-                // Update modal title with participant name
                 document.getElementById('detailsModalLabel').textContent = `📊 ${participant['User Name']}'s Progress`;
                 
-                // Create stats section
                 const statsHTML = `
                     <div class="stat-item">
                         <span class="stat-label">Skill Badges Completed:</span>
@@ -121,14 +125,11 @@ fetch('data.json')
                     </div>
                     <div class="stat-item">
                         <span class="stat-label">Rank:</span>
-                        <span class="stat-value">#${index + 1} ${rankEmoji}</span>
+                        <span class="stat-value">${rankDisplay} ${rankEmoji}</span>
                     </div>
                 `;
                 
-                // Create badge cards
                 const badgeCardsHTML = createBadgeCards(participant['Names of Completed Skill Badges']);
-                
-                // Create arcade game cards
                 const arcadeCardsHTML = createArcadeCards(participant['Names of Completed Arcade Games']);
                 
                 // Populate the modal sections
@@ -149,6 +150,7 @@ fetch('data.json')
                             ${arcadeCardsHTML}
                         </div>
                     </div>
+                  
                 `;
                 
                 // Show the modal
@@ -158,21 +160,23 @@ fetch('data.json')
 
             leaderboardBody.appendChild(participantRow);
 
-            // Increment completedParticipantsCount if participant completed all badges
-            if (totalBadges === maxBadges) {
+            if (totalBadges >= maxBadges) {
                 completedParticipantsCount++;
             }
         });
 
-        // Update target badges count
-        document.getElementById('target-progress').style.width = `${(completedParticipantsCount / data.length) * 100}%`;
-        document.getElementById('target-text').textContent = `✅ Completed: ${completedParticipantsCount} / ${data.length}`;
+        // Update target badges count (progress bar at the top)
+        const totalParticipants = data.length;
+        const targetProgressPercentage = (completedParticipantsCount / totalParticipants) * 100;
+
+        document.getElementById('target-progress').style.width = `${targetProgressPercentage}%`;
+        document.getElementById('target-text').textContent = `✅ Completed: ${completedParticipantsCount} / ${totalParticipants}`;
     })
     .catch(error => {
         console.error('Error loading leaderboard data:', error);
         document.getElementById('leaderboard-body').innerHTML = `
             <p style="color: #f85149; text-align: center; padding: 20px;">
-                ⚠️ Error loading leaderboard data. Please check the console for details.
+                ⚠️ Error loading leaderboard data. Please ensure 'data.json' exists and is correctly formatted.
             </p>
         `;
     });
